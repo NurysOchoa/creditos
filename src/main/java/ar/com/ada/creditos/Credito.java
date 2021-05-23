@@ -10,17 +10,17 @@ import ar.com.ada.creditos.entities.*;
 import ar.com.ada.creditos.excepciones.*;
 import ar.com.ada.creditos.managers.*;
 
-public class ABM {
+public class Credito {
 
     public static Scanner Teclado = new Scanner(System.in);
 
-    protected ClienteManager ABMCliente = new ClienteManager();
+    protected ClienteManager CreditoCliente = new ClienteManager();
 
     public void iniciar() throws Exception {
 
         try {
 
-            ABMCliente.setup();
+            CreditoCliente.setup();
 
             printOpciones();
 
@@ -67,7 +67,7 @@ public class ABM {
             }
 
             // Hago un safe exit del manager
-            ABMCliente.exit();
+            CreditoCliente.exit();
 
         } catch (Exception e) {
             // TODO: handle exception
@@ -104,7 +104,7 @@ public class ABM {
         fecha = dateformatArgentina.parse(Teclado.nextLine());
         cliente.setFechaNacimiento(fecha);
 
-        ABMCliente.create(cliente);
+        CreditoCliente.create(cliente);
 
         /*
          * Si concateno el OBJETO directamente, me trae todo lo que este en el metodo
@@ -123,7 +123,7 @@ public class ABM {
         System.out.println("Ingrese el ID de Cliente:");
         int id = Teclado.nextInt();
         Teclado.nextLine();
-        Cliente clienteEncontrado = ABMCliente.read(id);
+        Cliente clienteEncontrado = CreditoCliente.read(id);
 
         if (clienteEncontrado == null) {
             System.out.println("Cliente no encontrado.");
@@ -132,7 +132,7 @@ public class ABM {
 
             try {
 
-                ABMCliente.delete(clienteEncontrado);
+                CreditoCliente.delete(clienteEncontrado);
                 System.out
                         .println("El registro del cliente " + clienteEncontrado.getClienteId() + " ha sido eliminado.");
             } catch (Exception e) {
@@ -147,13 +147,13 @@ public class ABM {
         String nombre = Teclado.nextLine();
         System.out.println("Ingrese el DNI de Cliente:");
         int dni = Teclado.nextInt();
-        Cliente clienteEncontrado = ABMCliente.readByDNI(dni);
+        Cliente clienteEncontrado = CreditoCliente.readByDNI(dni);
 
         if (clienteEncontrado == null) {
             System.out.println("Cliente no encontrado.");
 
         } else {
-            ABMCliente.delete(clienteEncontrado);
+            CreditoCliente.delete(clienteEncontrado);
             System.out.println("El registro del DNI " + clienteEncontrado.getDni() + " ha sido eliminado.");
         }
     }
@@ -165,7 +165,7 @@ public class ABM {
         System.out.println("Ingrese el ID de la cliente a modificar:");
         int id = Teclado.nextInt();
         Teclado.nextLine();
-        Cliente clienteEncontrado = ABMCliente.read(id);
+        Cliente clienteEncontrado = CreditoCliente.read(id);
 
         if (clienteEncontrado != null) {
 
@@ -214,7 +214,7 @@ public class ABM {
 
             // Teclado.nextLine();
 
-            ABMCliente.update(clienteEncontrado);
+            CreditoCliente.update(clienteEncontrado);
 
             System.out.println("El registro de " + clienteEncontrado.getNombre() + " ha sido modificado.");
 
@@ -226,7 +226,7 @@ public class ABM {
 
     public void listar() {
 
-        List<Cliente> todos = ABMCliente.buscarTodos();
+        List<Cliente> todos = CreditoCliente.buscarTodos();
         for (Cliente c : todos) {
             mostrarCliente(c);
         }
@@ -237,7 +237,7 @@ public class ABM {
         System.out.println("Ingrese el nombre:");
         String nombre = Teclado.nextLine();
 
-        List<Cliente> clientes = ABMCliente.buscarPor(nombre);
+        List<Cliente> clientes = CreditoCliente.buscarPor(nombre);
         for (Cliente cliente : clientes) {
             mostrarCliente(cliente);
         }

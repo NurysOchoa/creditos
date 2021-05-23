@@ -8,9 +8,9 @@ public class App
 {
     public static void main( String[] args ) throws Exception
     {
-        ABM miABM = new ABM();
+        Credito miCredito = new Credito();
 
-        miABM.iniciar();
+        miCredito.iniciar();
 
     }
 }
